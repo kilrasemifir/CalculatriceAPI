@@ -57,8 +57,8 @@ namespace CalculatriceAPI.Controllers
         [Route("{id}")]
         public OperationDTO update(int id, [FromBody] OperationDTO data)
         {
-            operations[id] = data;
             data.Id = id;
+            operations[id] = data;
             return data;
         }
 
