@@ -65,7 +65,7 @@ namespace CalculatriceAPI.Controllers
 
         [HttpGet]
         [Route("nom/{nom}")]
-        public List<OperationDTO> findBuNom(string nom){
+        public List<OperationDTO> findByNom(string nom){
             List<OperationDTO> result = new List<OperationDTO>();
             foreach(OperationDTO op in operations){
                 if (op.nom == nom){
@@ -77,7 +77,7 @@ namespace CalculatriceAPI.Controllers
 
         [HttpGet]
         [Route("valeur/{valeur}")]
-        public List<OperationDTO> findBuNom(string valeur){
+        public List<OperationDTO> findByValeur(string valeur){
             List<OperationDTO> result = new List<OperationDTO>();
             foreach(OperationDTO op in operations){
                 if (op.valeur == valeur){
