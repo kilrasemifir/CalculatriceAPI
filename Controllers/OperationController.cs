@@ -42,7 +42,7 @@ namespace CalculatriceAPI.Controllers
         [Route("{id}")]
         public void delete(int id)
         {
-            operations.RemoveAt(id);
+            operations[id] = null;
         }
 
         [HttpPut]
