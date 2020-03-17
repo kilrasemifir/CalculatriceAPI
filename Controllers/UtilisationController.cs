@@ -64,9 +64,28 @@ namespace CalculatriceAPI.Controllers
 
         [HttpGet]
         [Route("age/{age}")]
-        public IEnumerable<UtilisateurDTO> FindByPrenom(int age)
+        public IEnumerable<UtilisateurDTO> FindByAge(int age)
         {
-            return utilisateurs.Where(op => op.Age == age);
+            //Very smart --> return utilisateurs.Where(op => op.Age == age);
+            List<UtilisateurDTO> result = new List<UtilisateurDTO>();
+            foreach (UtilisateurDTO user in utilisateurs)
+            {
+                if (user.Age == age) result.Add(user);
+            }
+            return result;
+        }
+
+        [HttpGet]
+        [Route("age")]
+        public IEnumerable<UtilisateurDTO> FindByAge(int min, int max = 1_000)
+        {
+            //Very smart --> return utilisateurs.Where(op => op.Age >= min && op.Age <= max);
+            List<UtilisateurDTO> result = new List<UtilisateurDTO>();
+            foreach (UtilisateurDTO user in utilisateurs)
+            {
+                if (user.Age <= max && user.Age >= min) result.Add(user);
+            }
+            return result;
         }
 
         [HttpGet]
