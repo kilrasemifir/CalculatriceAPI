@@ -19,14 +19,22 @@ namespace CalculatriceAPI.Controllers
         [Route("")]
         public List<OperationDTO> findAll()
         {
-            return operations;
+            List<OperationDTO> result = new List<OperationDTO>();
+            foreach(OperationDTO operation in operations)
+            {
+                if (operation != null)
+                {
+                    result.Add(operation);
+                }
+            }
+            return result;
         }
 
         [HttpPost]
         [Route("")]
         public OperationDTO save([FromBody] OperationDTO data)
         {
-            data.Id = operations.Count - 1;
+            data.Id = operations.Count;
             operations.Add(data);
             return data;
         }
