@@ -50,5 +50,31 @@ namespace CalculatriceAPI.Controllers
         {
             return (a + b).ToString();
         }
+
+        [HttpGet]
+        [Route("params")]
+        public string Params(int a, int b, string o)
+        {
+            string res;
+            switch (o)
+            {
+                case "AND":
+                    res = (a + b).ToString();
+                    break;
+                case "MUL":
+                    res = (a * b).ToString();
+                    break;
+                case "DIV":
+                    res = (a / b).ToString();
+                    break;
+                case "SUB":
+                    res = (a - b).ToString();
+                    break;
+                default:
+                    res = $"Operation {o} n'est pas definie!";
+                    break;
+            }
+            return res;
+        }
     }
 }
