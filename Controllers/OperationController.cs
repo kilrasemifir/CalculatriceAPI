@@ -26,8 +26,8 @@ namespace CalculatriceAPI.Controllers
         [Route("")]
         public OperationDTO save([FromBody] OperationDTO data)
         {
-            operations.Add(data);
             data.Id = operations.Count - 1;
+            operations.Add(data);
             return data;
         }
 
