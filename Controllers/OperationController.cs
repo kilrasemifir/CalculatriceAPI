@@ -34,7 +34,8 @@ namespace CalculatriceAPI.Controllers
         [Route("")]
         public OperationDTO save([FromBody] OperationDTO data)
         {
-            data.Id = operations.Count;
+           
+           
             operations.Add(data);
             return data;
         }
@@ -57,12 +58,34 @@ namespace CalculatriceAPI.Controllers
         [Route("{id}")]
         public OperationDTO update(int id, [FromBody] OperationDTO data)
         {
-            data.Id = id;
             operations[id] = data;
+        }
             return data;
         }
 
+        [HttpGet]
+        [Route("nom/{nom}")]
+        public List<OperationDTO> findBuNom(string nom){
+            List<OperationDTO> result = new List<OperationDTO>();
+            foreach(OperationDTO op in operations){
+                if (op.nom == nom){
+                    result.Add(op);
+                }
+            }
+            return result;
+        }
 
+        [HttpGet]
+        [Route("valeur/{valeur}")]
+        public List<OperationDTO> findBuNom(string valeur){
+            List<OperationDTO> result = new List<OperationDTO>();
+            foreach(OperationDTO op in operations){
+                if (op.valeur == valeur){
+                    result.Add(op);
+                }
+            }
+            return result;
+        }
 
     }
 }
