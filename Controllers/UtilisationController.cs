@@ -20,7 +20,7 @@ namespace CalculatriceAPI.Controllers
         [HttpGet]
         public IEnumerable<UtilisateurDTO> FindAll()
         {
-            return service.TrouverToutUtilisateur();
+            return service.TrouverTout();
         }
 
         [HttpPost]

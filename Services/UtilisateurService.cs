@@ -18,6 +18,6 @@ namespace CalculatriceAPI.Services
         public IEnumerable<UtilisateurDTO> TrouverParNom(string nom);
         public IEnumerable<UtilisateurDTO> TrouverParAge(int age);
         public IEnumerable<UtilisateurDTO> TrouverParAge(int min, int max);
-        public IEnumerable<UtilisateurDTO> TrouverParMetier(string metier)
+        public IEnumerable<UtilisateurDTO> TrouverParMetier(string metier);
     }
 }
