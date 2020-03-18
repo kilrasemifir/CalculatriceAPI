@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatriceAPI.Services.Impl
 {
+
+    
     using DTO;
     public class OperationStandardService : OperationService
     {
