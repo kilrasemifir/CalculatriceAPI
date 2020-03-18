@@ -8,91 +8,72 @@ using Microsoft.AspNetCore.Mvc;
 namespace CalculatriceAPI.Controllers
 {
     using DTO;
+    using Services;
+    using Services.Impl;
 
     [Route("api/utilisateurs")]
     [ApiController]
     public class UtilisationController : ControllerBase
     {
-        private static List<UtilisateurDTO> utilisateurs = new List<UtilisateurDTO>();
+        private static UtilisateurService service = new UtilisateurCalculatriceService();
 
         [HttpGet]
         public IEnumerable<UtilisateurDTO> FindAll()
         {
-            return utilisateurs;
+            return service.TrouverToutUtilisateur();
         }
 
         [HttpPost]
-        public void Save([FromBody] UtilisateurDTO value)
+        public UtilisateurDTO Save([FromBody] UtilisateurDTO value)
         {
-            utilisateurs.Add(value);
+            return service.AjouterUnUtilisateur(value);
         }
 
         [HttpGet]
         [Route("{id}")]
         public UtilisateurDTO FindById(int id)
         {
-            return utilisateurs[id];
+            return service.TrouverUnUtilisateur(id);
         }
 
         [HttpPut("{id}")]
         public UtilisateurDTO Update(int id, [FromBody] UtilisateurDTO value)
         {
-            value.Id = id;
-            utilisateurs[id] = value;
-            return value;
+            return service.Modifier(id, value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            utilisateurs[id] = null;
+            service.SupprimerUtilisateur(id);
         }
 
         [HttpGet]
         [Route("nom/{nom}")]
         public IEnumerable<UtilisateurDTO> FindByNom(string nom)
         {
-            return utilisateurs.Where(op => op.Nom == nom);
-        }
-
-        [HttpGet]
-        [Route("prenom/{prenom}")]
-        public IEnumerable<UtilisateurDTO> FindByPrenom(string prenom)
-        {
-            return utilisateurs.Where(op => op.Prenom == prenom);
+            return service.TrouverParNom(nom);
         }
 
         [HttpGet]
         [Route("age/{age}")]
         public IEnumerable<UtilisateurDTO> FindByAge(int age)
         {
-            //Very smart --> return utilisateurs.Where(op => op.Age == age);
-            List<UtilisateurDTO> result = new List<UtilisateurDTO>();
-            foreach (UtilisateurDTO user in utilisateurs)
-            {
-                if (user.Age == age) result.Add(user);
-            }
-            return result;
+            return service.TrouverParAge(age);
         }
 
         [HttpGet]
         [Route("age")]
         public IEnumerable<UtilisateurDTO> FindByAge(int min, int max = 1_000)
         {
-            //Very smart --> return utilisateurs.Where(op => op.Age >= min && op.Age <= max);
-            List<UtilisateurDTO> result = new List<UtilisateurDTO>();
-            foreach (UtilisateurDTO user in utilisateurs)
-            {
-                if (user.Age <= max && user.Age >= min) result.Add(user);
-            }
-            return result;
+            return service.TrouverParAge(min,max);
         }
 
         [HttpGet]
         [Route("metier/{metier}")]
         public IEnumerable<UtilisateurDTO> FindByMetier(string metier)
         {
-            return utilisateurs.Where(op => op.Metier == metier);
+            return service.TrouverParMetier(metier);
         }
     }
 }
