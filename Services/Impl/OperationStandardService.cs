@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CalculatriceAPI.Services.Impl
 {
 
-    
+
     using DTO;
     public class OperationStandardService : OperationService
     {
@@ -26,12 +26,31 @@ namespace CalculatriceAPI.Services.Impl
         }
         public OperationDTO AjouterUn(OperationDTO data){
             data.Id = operations.Count();
-            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.AuteurId);
+            //data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.AuteurId);
+            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.Auteur.Id); //<================================= ICI
+            /*
+                pour le json:
+                avant:
+                {
+                    "nom":"test",
+                    "valeur":"ma valeur",
+                    "auteurId":1
+                }
+                apres:
+                {
+                    "nom":"test",
+                    "valeur":"ma valeur",
+                    "auteur":{
+                        "id":1
+                    }
+                }
+            */
             operations.Add(data);
             return data;
         }
         public OperationDTO Modifier(int id, OperationDTO data){
             data.Id = id;
+            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.Auteur.Id); //<================================= ICI
             operations[id] = data;
             return data;
         }

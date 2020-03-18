@@ -27,8 +27,15 @@ namespace CalculatriceAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(typeof(OperationService), typeof(OperationStandardService));
-            services.AddSingleton(typeof(UtilisateurService), typeof(UtilisateurCalculatriceService));
+            // 3) ajouter le service ici
+            services.AddSingleton(
+                typeof(OperationService), // Si tu as besoin d'un Object Service de type ...
+                typeof(OperationStandardService) // Tu creer un singleton de type....
+            );
+            services.AddSingleton(
+                typeof(UtilisateurService),
+                typeof(UtilisateurCalculatriceService)
+            );
             services.AddControllers();
         }
 

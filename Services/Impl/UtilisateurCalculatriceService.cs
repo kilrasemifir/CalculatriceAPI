@@ -14,6 +14,8 @@ namespace CalculatriceAPI.Services.Impl
         public IEnumerable<UtilisateurDTO> TrouverTout(){
             return utilisateurs.Where(u => u != null);
         }
+
+        public UtilisateurCalculatriceService() {} // TO REMOVE
         public UtilisateurDTO TrouverUnUtilisateur(int id){
             return utilisateurs[id];
         }

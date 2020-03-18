@@ -13,11 +13,13 @@ namespace CalculatriceAPI.Controllers
 
     [Route("api/utilisateurs")]
     [ApiController]
-    public class UtilisationController : ControllerBase
+    public class UtilisateurController : ControllerBase
     {
+        // Attribut du service
         private UtilisateurService service;
 
-        public UtilisationController(UtilisateurService service){
+        // un Constructeur qui prend en params le service
+        public UtilisateurController(UtilisateurService service){
             this.service = service;
         }
 
