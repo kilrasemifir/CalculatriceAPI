@@ -15,7 +15,11 @@ namespace CalculatriceAPI.Controllers
     [ApiController]
     public class UtilisationController : ControllerBase
     {
-        private static UtilisateurService service = new UtilisateurCalculatriceService();
+        private UtilisateurService service;
+
+        public UtilisationController(UtilisateurService service){
+            this.service = service;
+        }
 
         [HttpGet]
         public IEnumerable<UtilisateurDTO> FindAll()

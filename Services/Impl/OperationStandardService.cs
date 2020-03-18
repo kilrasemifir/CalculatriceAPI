@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CalculatriceAPI.Services.Impl
 {
     using DTO;
-    public class OperationStandartService : OperationService
+    public class OperationStandardService : OperationService
     {
         private static List<OperationDTO> operations = new List<OperationDTO>();
         public IEnumerable<OperationDTO> TrouverTout(){
