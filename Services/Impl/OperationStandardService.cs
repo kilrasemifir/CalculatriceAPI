@@ -10,52 +10,43 @@ namespace CalculatriceAPI.Services.Impl
 
 
     using DTO;
+    using Models;
+    using Repositories;
     public class OperationStandardService : OperationService
     {
-        private static List<OperationDTO> operations = new List<OperationDTO>();
+        
         private UtilisateurService utilisateurService;
+        // Injection repo
+        private OperationRepository repository;
 
-        public OperationStandardService(UtilisateurService utilisateurService){
+        public OperationStandardService(UtilisateurService utilisateurService, OperationRepository repository){
             this.utilisateurService = utilisateurService;
+            this.repository = repository;
         }
+
         public IEnumerable<OperationDTO> TrouverTout(){
-            return operations.Where(u => u != null);
+            List<OperationDTO> result = new List<OperationDTO>();
+            foreach (Operation op in this.repository.FindAll())
+            {
+                result.Add(op);
+            }
+            return result;
         }
+
         public OperationDTO TrouverUn(int id){
-            return operations[id];
+            return this.repository.FindById(id);
         }
+
         public OperationDTO AjouterUn(OperationDTO data){
-            data.Id = operations.Count();
-            //data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.AuteurId);
-            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.Auteur.Id); //<================================= ICI
-            /*
-                pour le json:
-                avant:
-                {
-                    "nom":"test",
-                    "valeur":"ma valeur",
-                    "auteurId":1
-                }
-                apres:
-                {
-                    "nom":"test",
-                    "valeur":"ma valeur",
-                    "auteur":{
-                        "id":1
-                    }
-                }
-            */
-            operations.Add(data);
-            return data;
+            return this.repository.Save(data);
         }
+
         public OperationDTO Modifier(int id, OperationDTO data){
-            data.Id = id;
-            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.Auteur.Id); //<================================= ICI
-            operations[id] = data;
-            return data;
+            return this.repository.Update(data);
         }
+
         public void Supprimer(int id){
-            operations[id] = null;
+            this.repository.Delete(id);
         }
     }
 }

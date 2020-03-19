@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CalculatriceAPI.DTO
+namespace CalculatriceAPI.Models
 {
-    using Models;
-    public class OperationDTO
+    using DTO;
+    public class Operation
     {
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Valeur { get; set; }
         //public int AuteurId {get; set;}
-        public UtilisateurDTO Auteur { get; set; }
+        public Utilisateur Auteur { get; set; }
 
-        public OperationDTO() { }
-
-        public OperationDTO(int id, string nom, string valeur, UtilisateurDTO auteur)
+        public Operation() { }
+        public Operation(int id, string nom, string valeur, Utilisateur auteur)
         {
             Id = id;
             Nom = nom;
@@ -24,10 +23,9 @@ namespace CalculatriceAPI.DTO
             Auteur = auteur;
         }
 
-        public static implicit operator Operation (OperationDTO op)
+        public static implicit operator OperationDTO (Operation op)
         {
-            return new Operation(op.Id, op.Nom, op.Valeur, op.Auteur);
+            return new OperationDTO(op.Id, op.Nom, op.Valeur, new UtilisateurDTO(op.Auteur));
         }
-
     }
 }

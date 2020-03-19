@@ -15,6 +15,8 @@ namespace CalculatriceAPI
 {
     using Services;
     using Services.Impl;
+    using Repositories;
+    using Repositories.Impl;
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -36,6 +38,9 @@ namespace CalculatriceAPI
                 typeof(UtilisateurService),
                 typeof(UtilisateurCalculatriceService)
             );
+            // Autre maniere de faire.
+            services.AddSingleton<OperationRepository, OperationFakeRepository>();
+
             services.AddControllers();
         }
 
